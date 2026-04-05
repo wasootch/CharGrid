@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordle Helper</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Wordle Helper</h1>
+    <p class="subtitle">Enter what you know to find matching words</p>
+
+    <div class="section green-section">
+      <div class="section-label">
+        <span class="dot green"></span>
+        Correct position
+      </div>
+      <div class="letter-row">
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box green-box" data-pos="0" placeholder="1">
+        </div>
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box green-box" data-pos="1" placeholder="2">
+        </div>
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box green-box" data-pos="2" placeholder="3">
+        </div>
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box green-box" data-pos="3" placeholder="4">
+        </div>
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box green-box" data-pos="4" placeholder="5">
+        </div>
+      </div>
+    </div>
+
+    <div class="section yellow-section">
+      <div class="section-label">
+        <span class="dot yellow"></span>
+        In word, wrong position
+      </div>
+      <div class="letter-row">
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box yellow-box" data-mispos="0" placeholder="1">
+        </div>
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box yellow-box" data-mispos="1" placeholder="2">
+        </div>
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box yellow-box" data-mispos="2" placeholder="3">
+        </div>
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box yellow-box" data-mispos="3" placeholder="4">
+        </div>
+        <div class="letter-cell">
+          <input type="text" maxlength="1" class="letter-box yellow-box" data-mispos="4" placeholder="5">
+        </div>
+      </div>
+      <div class="hint">Enter a letter at the position where it appeared yellow</div>
+    </div>
+
+    <div class="section gray-section">
+      <div class="section-label">
+        <span class="dot gray"></span>
+        Not in word
+      </div>
+      <input type="text" id="excluded" class="text-input" placeholder="Type letters not in the word, e.g. strnb" autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>
+
+    <button id="find-btn" onclick="filterWords()">Find Matching Words</button>
+    <button id="reset-btn" onclick="resetAll()">Reset</button>
+
+    <div id="results-container">
+      <div id="results-header"></div>
+      <div id="results"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

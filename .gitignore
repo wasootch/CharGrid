@@ -1,0 +1,4 @@
+**/node_modules/
+**/db/words.db
+
+package-lock.json

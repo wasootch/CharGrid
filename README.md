@@ -1,6 +1,6 @@
 # CharGrid
 
-A Wordle helper that filters possible words based on what you know.
+A Wordle helper that filters possible words based on what you know. Live at [wordle.scottadams.ca](https://wordle.scottadams.ca).
 
 ## Features
 
@@ -8,7 +8,7 @@ A Wordle helper that filters possible words based on what you know.
 - Past Wordle answers are shown dimmed with a strikethrough — they're less likely to appear again
 - Keyboard navigation: arrow keys move between letter boxes, Enter submits
 
-## Setup
+## Local Setup
 
 **First time only** — seed the word database:
 
@@ -17,13 +17,13 @@ npm install
 npm run seed
 ```
 
-## Running
+Then:
 
 ```bash
 npm start
 ```
 
-Then open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Word Lists
 
@@ -36,10 +36,22 @@ To rebuild the database from scratch, delete `db/words.db` and run `npm run seed
 
 ## Deployment
 
-The app is a Node.js/Express server and can be deployed to any platform that supports Node.js (e.g. Railway, Render, Fly.io).
+The app is deployed to [Google Cloud Run](https://cloud.google.com/run) via [Cloud Build](https://cloud.google.com/build), with the domain served through Cloudflare.
 
-On deploy, `npm run build` seeds the SQLite database from `words5.txt` and `words_used.txt`, both of which are committed to the repo. No external database service is required.
+### How it works
 
-To serve the app under a custom domain, point a CNAME DNS record at the hosting platform's provided hostname. Setting the DNS proxy to enabled (if your DNS provider supports it) will handle SSL automatically.
+- On each push to `main`, Cloud Build builds the Docker image, seeds the SQLite database from the word list files, and deploys to Cloud Run
+- The image is stored in Artifact Registry
+- The custom domain is mapped via `gcloud run domain-mappings` with DNS managed through Cloudflare
 
-The `PORT` environment variable is respected if set by the hosting platform; it defaults to `3000`.
+### Manual deploy
+
+```bash
+gcloud builds submit --config cloudbuild.yaml
+```
+
+### Domain mapping
+
+```bash
+gcloud run domain-mappings create --service chargrid --domain wordle.scottadams.ca
+```

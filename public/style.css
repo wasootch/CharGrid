@@ -201,6 +201,8 @@ h1 {
   letter-spacing: 2px;
   color: #ffffff;
   transition: background 0.1s;
+  width: 90px;
+  place-items: center;
 }
 
 .word-chip:hover {
@@ -209,10 +211,8 @@ h1 {
 }
 
 .word-chip.past-answer {
-  color: #818384;
-  border-color: #2a2a2c;
-  text-decoration: line-through;
-  text-decoration-color: #555;
+  color: #e3c119;
+  border-color: #fdd81f;
 }
 
 .word-chip.past-answer:hover {

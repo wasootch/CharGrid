@@ -2,6 +2,10 @@ document.querySelector('.letter-box').focus();
 
 // Auto-advance focus through letter boxes
 document.querySelectorAll('.letter-box').forEach((box) => {
+  box.addEventListener('focus', (e) => {
+    e.target.select();
+  });
+
   box.addEventListener('input', (e) => {
     const val = e.target.value.replace(/[^a-zA-Z]/g, '');
     e.target.value = val.toUpperCase().slice(-1);
